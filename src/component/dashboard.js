@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import { stat } from 'fs';
+import AnsweredQues from './answeredQues'
+import UnAnsweredQues from './unAnsweredQues'
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
@@ -8,11 +9,13 @@ class Dashboard extends React.Component {
 
          }
     }
+    
+    
     render() { 
         return ( 
             <div>
-                <h1> dashboard  {this.props.auth.authLogged ?
-                    this.props.auth.users : ''}  </h1>
+                <UnAnsweredQues />
+                <AnsweredQues />
             </div>
          );
     }

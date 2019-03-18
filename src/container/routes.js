@@ -1,25 +1,54 @@
 import React from 'react';
-import {Route, BrowserRouter,Switch} from 'react-router-dom';
+import { Route, BrowserRouter, Switch,Link } from 'react-router-dom';
 import Login from './login'
 import Dashboard from '../component/dashboard'
+import Navbar from '../component/navbar'
+import NextQuestion from '../component/nextQues'
+import Leader from '../component/leader'
+import RenderUnAns from '../component/renderUnAns'
+import UnAnsResult from '../component/unAnsResult'
 
 class Routes extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = {
+            islogin: false
+        }
     }
-    render() { 
-        return ( 
+    componentDidMount() {
+        this.setState({ islogin: true })
+    }
+    render() {
+        const { islogin } = this.state
+        return (
             <div>
-                <BrowserRouter>
-                    <Switch>
-                        <Route exact path='/' component={Login}  />
-                        <Route exact path='/dashboard' component={Dashboard}  />
-                    </Switch>
-                </BrowserRouter>
+                {islogin === true ?
+                    <div>
+                        <div>
+                        <div>
+                        <Navbar />
+                           
+                        </div> 
+                        </div>
+                        <BrowserRouter>
+                        <Link to='/dashboard' >Home</Link>
+                            <Link to='/nextQues' >Next Question</Link>
+                            <Link to='/leader'>Leader Board</Link>
+                            <Switch>
+                                <Route exact path='/' component={Login} />
+                                <Route path='/dashboard' component={Dashboard} />
+                                <Route path='/nextQues' component={NextQuestion} />
+                                <Route path='/leader' component={Leader} />
+                                <Route path='/renderUnAns' component={RenderUnAns} />
+                                <Route path='/unAnsResult' component={UnAnsResult} />
+                            </Switch>
+                        </BrowserRouter>
+                    </div>
+                    : <h1> Loading </h1>}
             </div>
-         );
+
+        );
     }
 }
- 
+
 export default Routes;
