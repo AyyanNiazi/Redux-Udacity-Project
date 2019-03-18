@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import * as actionBind from '../store/action/authAction'
+import auth from '../store/action/authAction'
 
 class Login extends React.Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class Login extends React.Component {
 
 submitHandler = (e) => {
     const {name, pass} = this.state;
-    e.preventDefault;
+    e.preventDefault();
 
     const userDetail = {
         name, //ecma 6 use also "name: name" than this
@@ -21,6 +21,7 @@ submitHandler = (e) => {
     }
 
     this.props.userAction(userDetail);
+    this.props.history.push('./dashboard')
 }
     render() { 
         return ( 
@@ -38,8 +39,15 @@ submitHandler = (e) => {
 }
  
 // redux
-const mapStateToProps = (state) => {
-    re
-}
+// const mapStateToProps = (state) => {
+//     return {
+//         auth
+//     }
+// }
 
-export default Login;
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        userAction : userDetail => dispatch(auth(userDetail)),
+    }
+}
+export default connect(null,mapDispatchToProps)(Login);

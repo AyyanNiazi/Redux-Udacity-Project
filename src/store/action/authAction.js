@@ -1,8 +1,10 @@
 import actionTypes from './actionTypes'
 
-export const auth = (userDetail) => {
+const auth = (userDetail) => {
     return {
         type: actionTypes.AUTH,
-        payload: userDetail,
+        payload: userDetail.name,
     }
 }
+
+export default auth
