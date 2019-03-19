@@ -14,19 +14,20 @@ class RenderUnAns extends React.Component {
         }
     }
 
-    submitHandler(e) {
+    submitHandler(e,delId) {
         const { rad1, rad2, radChecked } = this.state;
+        const {currId} = this.props
         e.preventDefault();
-
+        var delId = delId;
         const id= Math.random();
         if (radChecked === true) {
-            let unAnsQuesDetail = {
+            var unAnsQuesDetail = {
                 constRad: rad1,
                 id,
             }
             this.props.unAnsQuesProps(unAnsQuesDetail)
             this.setState({ redirect: true })
-            console.log(unAnsQuesDetail, "unAns1")
+            console.log(unAnsQuesDetail.constRad , "unAns1")
         }
         else if (radChecked === false) {
             let unAnsQuesDetail = {
@@ -35,10 +36,40 @@ class RenderUnAns extends React.Component {
             }
             this.props.unAnsQuesProps(unAnsQuesDetail)
             this.setState({ redirect: true })
-
-            console.log(unAnsQuesDetail, "unAns2")
+            this.props.currId.pop()
         }
+        const filterArr = this.props.currId.filter((e) => {
+            if (e.id === delId) {
+                
+              return true
+            }
+          })
+          filterArr.forEach((element) => {
+            currId.splice(currId.findIndex(f =>
+              f.delId === element.delId), 1)
+          });
 
+          console.log(filterArr,"filter")
+
+
+    }
+
+    componentWillReceiveProps(nextProps) {
+    const {redirect} = this.state
+        if(redirect === true){
+            console.log(this.props.currId, "will props redirect wali")
+            }
+            console.log(nextProps)
+    }
+    componentWillMount() {
+        const {redirect} = this.state
+        if(redirect === true){
+        console.log(this.props.currId, "will mount redirect wali")
+
+        }
+        console.log(this.props.currId, "will mount wali")
+
+    
     }
 
     render() {
@@ -55,7 +86,7 @@ class RenderUnAns extends React.Component {
                         return (
                             <div key={i} >
                                 <h1> name {this.props.auth}  </h1>
-                                <form onSubmit={(e) => this.submitHandler(e)} >
+                                <form onSubmit={(e) => this.submitHandler(e, v.id)} >
                                     <input type='radio' value={this.state.rad1} name='opt1'
                                         onChange={(e) => this.setState({ rad1: v.opt1, radChecked: true })} />
                                     {v.opt1}
@@ -63,7 +94,7 @@ class RenderUnAns extends React.Component {
                                     <input type='radio' value={this.state.rad2} name='opt1'
                                         onChange={(e) => this.setState({ rad2: v.opt2, radChecked: false })} />
                                     {v.opt2}    <br />
-                                    <input type='submit' />
+                                    <input type='submit'  />
                                 </form>
                             </div>
                         )
