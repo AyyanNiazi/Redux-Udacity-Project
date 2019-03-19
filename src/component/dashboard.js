@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import AnsweredQues from './answeredQues'
+import AnsQUesResult from './ansQuesResult'
 import UnAnsweredQues from './unAnsweredQues'
 class Dashboard extends React.Component {
     constructor(props) {
@@ -14,8 +14,8 @@ class Dashboard extends React.Component {
     render() { 
         return ( 
             <div>
-                <UnAnsweredQues />
-                <AnsweredQues />
+                <UnAnsweredQues /> <br/>
+                <AnsQUesResult />
             </div>
          );
     }

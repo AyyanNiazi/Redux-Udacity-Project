@@ -25,7 +25,8 @@ class Navbar extends React.Component {
 
                   
                 </BrowserRouter>
-                <h1> Hello navbar user {this.props.auth.authLogged === !false && this.props.auth.users.length !== 0 ?
+                <h1> Hello {this.props.auth.authLogged === !false 
+                && this.props.auth.users.length !== 0 ?
                     this.props.auth.users : void 0} </h1>
 
             </div>

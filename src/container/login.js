@@ -7,30 +7,41 @@ class Login extends React.Component {
         super(props);
         this.state = { 
             name: '',
-            pass: '',
-         }
+            select: '',
+        }
+    }
+
+    selecthandler(e){
+        const {select} = this.state
+        this.setState({ select: e })
+        
     }
 
 submitHandler = (e) => {
-    const {name, pass} = this.state;
+    const {name, select} = this.state;
     e.preventDefault();
 
     const userDetail = {
-        name, //ecma 6 use also "name: name" than this
-        pass,
+        select, //ecma 6 use also "name: name" than this
     }
 
     this.props.userAction(userDetail);
     this.props.history.push('./dashboard')
+    console.log(userDetail)
 }
+
     render() { 
+        const {select} = this.state
         return ( 
             <div>
                 <form onSubmit={(e) => this.submitHandler(e)} >
-                    <input type='text' value={this.state.name}
-                    onChange={(e) => this.setState({name: e.target.value }) }  />
-                     <input type='password' value={this.state.pass}
-                    onChange={(e) => this.setState({pass: e.target.value }) }  />
+                    <select value={select} 
+                    onChange={(e) => this.selecthandler( e.target.value)} >
+                        <option value='hunzala' >Hunzala</option>
+                        <option value='haadi' >Haadi</option>
+                        <option value='emaan' >Emaan Fatima</option>
+                    </select>
+                   
                     <input type='submit' />
                 </form>
             </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import {Redirect} from 'react-router-dom'
-import choiceAction from '../store/action/unAnsQues'
+import { Redirect } from 'react-router-dom'
+import choiceAction from '../store/action/unAnsQuesAction'
 
 class RenderUnAns extends React.Component {
     constructor(props) {
@@ -12,61 +12,63 @@ class RenderUnAns extends React.Component {
             radChecked: undefined,
             redirect: false
         }
-}
-
-submitHandler(e){
-    const {rad1,rad2,radChecked} = this.state;
-    e.preventDefault();
-
-
-if(radChecked === true ){
-    let unAnsQuesDetail = {
-        constRad: rad1,
     }
-    this.props.unAnsQuesProps(unAnsQuesDetail)
-    this.setState({ redirect: true })
-    console.log(unAnsQuesDetail, "unAns1")
- }
- else if(radChecked === false){
-    let unAnsQuesDetail = {
-        constRad: rad2,
-    }
-    this.props.unAnsQuesProps(unAnsQuesDetail)
-    this.setState({ redirect: true })
 
-    console.log(unAnsQuesDetail, "unAns2")
- }
-   
-}
+    submitHandler(e) {
+        const { rad1, rad2, radChecked } = this.state;
+        e.preventDefault();
+
+        const id= Math.random();
+        if (radChecked === true) {
+            let unAnsQuesDetail = {
+                constRad: rad1,
+                id,
+            }
+            this.props.unAnsQuesProps(unAnsQuesDetail)
+            this.setState({ redirect: true })
+            console.log(unAnsQuesDetail, "unAns1")
+        }
+        else if (radChecked === false) {
+            let unAnsQuesDetail = {
+                constRad: rad2,
+                id,
+            }
+            this.props.unAnsQuesProps(unAnsQuesDetail)
+            this.setState({ redirect: true })
+
+            console.log(unAnsQuesDetail, "unAns2")
+        }
+
+    }
 
     render() {
-        const {redirect} = this.state;
-        if(redirect === true ){
+        const { redirect } = this.state;
+        if (redirect === true) {
             return (
-                <Redirect to='/unAnsResult' />
+                <Redirect to='/ansQuesResult' />
             )
         }
         return (
             <div>
-                <ul> 
-               {this.props.currId.map((v,i)=>{
-                   return (
-                       <div key={i} >
-                        <h1> name {this.props.auth}  </h1> 
-                    <form onSubmit={(e)=> this.submitHandler(e)} > 
-                        <input type='radio' value={this.state.rad1 }  name='opt1' 
-                        onChange={(e) => this.setState({rad1: v.opt1,radChecked: true })} /> 
-                        {v.opt1}   
+                <ul>
+                    {this.props.currId.map((v, i) => {
+                        return (
+                            <div key={i} >
+                                <h1> name {this.props.auth}  </h1>
+                                <form onSubmit={(e) => this.submitHandler(e)} >
+                                    <input type='radio' value={this.state.rad1} name='opt1'
+                                        onChange={(e) => this.setState({ rad1: v.opt1, radChecked: true })} />
+                                    {v.opt1}
 
-                         <input type='radio' value={this.state.rad2 } name='opt1' 
-                        onChange={(e) => this.setState({rad2: v.opt2, radChecked:false})} /> 
-                        {v.opt2}    <br/>
-                        <input type='submit' />
-                    </form>
-                         </div>
-                   )
-               })}   
-               </ul>  
+                                    <input type='radio' value={this.state.rad2} name='opt1'
+                                        onChange={(e) => this.setState({ rad2: v.opt2, radChecked: false })} />
+                                    {v.opt2}    <br />
+                                    <input type='submit' />
+                                </form>
+                            </div>
+                        )
+                    })}
+                </ul>
             </div>
         );
     }
@@ -76,7 +78,7 @@ const mapStateToProps = (state) => {
     return {
         data: state.data.nextQues,
         auth: state.auth.users
-     }
+    }
 }
 const mapDispatchToProps = (dispatch) => {
     return {

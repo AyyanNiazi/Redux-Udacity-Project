@@ -29,6 +29,7 @@ idHandler=(id)=>{
         const {idLogger, currId} = this.state
         return ( 
             <div>
+             <h1> name {this.props.auth}  </h1>
                 {idLogger === true ? <RenderUnAns currId={currId} />
                 :  <div>
                 <h1> unanswred ques </h1>
@@ -36,7 +37,6 @@ idHandler=(id)=>{
                 {this.props.data.map((v,i)=>{
                     return (
                      <div key={i}>
-                        <li> name {this.props.auth}  </li>
                        <li style={{cursor: 'pointer'}}
                        value={idLogger} onClick={this.idHandler.bind(this, v.id) }>  click </li> 
                        {/* <li> <Link to='/renderUnAns' > View Poll  </Link> </li> */}

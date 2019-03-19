@@ -6,7 +6,7 @@ import Navbar from '../component/navbar'
 import NextQuestion from '../component/nextQues'
 import Leader from '../component/leader'
 import RenderUnAns from '../component/renderUnAns'
-import UnAnsResult from '../component/unAnsResult'
+import AnsQUesResult from '../component/ansQuesResult'
 
 class Routes extends React.Component {
     constructor(props) {
@@ -40,7 +40,7 @@ class Routes extends React.Component {
                                 <Route path='/nextQues' component={NextQuestion} />
                                 <Route path='/leader' component={Leader} />
                                 <Route path='/renderUnAns' component={RenderUnAns} />
-                                <Route path='/unAnsResult' component={UnAnsResult} />
+                                <Route path='/ansQuesResult' component={AnsQUesResult} />
                             </Switch>
                         </BrowserRouter>
                     </div>
